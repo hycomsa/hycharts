@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  krakend:
+  - apiVersion: v2
+    appVersion: 1.1.1
+    created: "2021-03-19T10:12:59.104655214+01:00"
+    description: A Helm chart for Kubernetes
+    digest: 8bc2c7f2ec615a4d7d9d7ced906035d849a09ad16e2a95d223f10c2de14d4202
+    name: krakend
+    type: application
+    urls:
+    - https://hy-cloud-marcin-masternak.github.io/hycharts/krakend-0.3.0.tgz
+    version: 0.3.0
+generated: "2021-03-19T10:12:59.103994496+01:00"
