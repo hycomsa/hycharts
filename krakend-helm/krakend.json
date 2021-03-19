@@ -1,0 +1,55 @@
+{
+  "version": 2,
+  "name": "My lovely gateway",
+  "port": 8080,
+  "cache_ttl": "3600s",
+  "timeout": "3s",
+  "extra_config": {
+    "github_com/devopsfaith/krakend-gologging": {
+      "level":  "DEBUG",
+      "prefix": "[KRAKEND]",
+      "syslog": false,
+      "stdout": true
+    }
+  },
+  "endpoints": [
+      {
+          "endpoint": "/health",
+          "method": "GET",
+          "backend": [
+              {
+                  "host": [
+                      "https://jsonplaceholder.typicode.com"
+                  ],
+            "mapping": {
+          "body": "output"
+            },
+      "whitelist": [
+          "id",
+          "body"
+             ],
+                  "url_pattern": "/posts/1",
+                  "extra_config": {
+                      "github.com/devopsfaith/krakend-circuitbreaker/gobreaker": {
+                          "interval": 60,
+                          "timeout": 10,
+                          "maxErrors": 1
+                      }
+                  }
+              }
+          ],
+    "extra_config": {
+      "github.com/devopsfaith/krakend/proxy": {
+          "static": {
+                "strategy": "success",
+                "data": {
+                      "name": "IDEART",
+         "env": "pre",
+         "status": "pass"
+                }
+          }
+      }
+    }
+      }
+  ]
+}
