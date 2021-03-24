@@ -85,17 +85,17 @@ probes:
     enabled: true
     probe:
       httpGet:
-        path: /health
+        path: /__health
         port: http
   readiness:
     enabled: true
     probe:
       httpGet:
-        path: /health
+        path: /__health
         port: http
   startup:
     enabled: false
     probe:
       httpGet:
-        path: /health
+        path: /__health
         port: http
