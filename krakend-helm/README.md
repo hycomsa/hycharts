@@ -1,6 +1,6 @@
 # krakend-helm
 An helm chart to deploy krakend in  a kubernetes cluster
-(fork from  https://github.com/mikescandy/krakend-helm)
+
 * Installs the api-gateway system [KrakenD](http://krakend.io/)
 
 ## TL;DR;
@@ -59,3 +59,7 @@ incompatible breaking change needing manual actions.
 | `serviceAccount.name`                     | Service account name to use, when empty will be set to created account if `serviceAccount.create` is set else to `default` | `` |
 | `podAnnotations`                          | Deployment                               | `{}`                                                    |
 | `namespaceOverride`                       | Override the deployment namespace             | `""` (`Release.Namespace`)                              |
+
+
+## Credits
+Full credit list at https://github.com/hycomsa/hycharts/blob/master/krakend-helm/CREDITS.md
