@@ -1,3 +1,5 @@
+Forked from [krakend-helm](https://github.com/mikescandy/krakend-helm).
+
 # krakend-helm
 An helm chart to deploy krakend in  a kubernetes cluster
 
