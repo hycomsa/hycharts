@@ -101,4 +101,4 @@ probes:
         port: http
 
 flexible_config:
-  enabled: true
+  enabled: false
