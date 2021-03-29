@@ -1,0 +1,8 @@
+{{- if .Values.flexible_config.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: templates-configmap
+data:
+{{ (.Files.Glob "flexible-configuration/templates/*").AsConfig | indent 4 }}
+{{- end }}

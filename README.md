@@ -17,3 +17,8 @@ $ git push origin master
 
 From there, I can do a 
 `helm repo add hycharts https://hycomsa.github.io/hycharts/`
+
+### Using KrakenD Flexible Configuration
+
+Enable Flexible Config in values yaml and put your components into flexible-configuration directory with settings, partials and templates respectively as described by [official documentation](https://www.krakend.io/docs/configuration/flexible-config/).
+

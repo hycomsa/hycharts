@@ -1,0 +1,8 @@
+{{- if .Values.flexible_config.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: partials-configmap
+data:
+{{ (.Files.Glob "flexible-configuration/partials/*").AsConfig | indent 4 }}
+{{- end }}
