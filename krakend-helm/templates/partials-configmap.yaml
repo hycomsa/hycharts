@@ -1,4 +1,4 @@
-{{- if .Values.flexible_config.enabled }}
+{{- if and (.Values.flexible_config.enabled) ( eq (.Files.Glob "flexible-configuration/partials/*").AsConfig "" ) }}
 apiVersion: v1
 kind: ConfigMap
 metadata:

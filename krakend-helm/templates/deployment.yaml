@@ -28,12 +28,15 @@ spec:
         - name: settings-config
           configMap:
             name: settings-configmap
+            optional: true
         - name: partials-config
           configMap:
             name: partials-configmap
+            optional: true
         - name: templates-config
           configMap:
             name: templates-configmap
+            optional: true
         {{- end }}
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
