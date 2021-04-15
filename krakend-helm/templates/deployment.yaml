@@ -24,6 +24,20 @@ spec:
         - name: config
           configMap:
             name: {{ template "krakend.fullname" . }}-configmap
+        {{- if .Values.flexible_config.enabled }}
+        - name: settings-config
+          configMap:
+            name: settings-configmap
+            optional: true
+        - name: partials-config
+          configMap:
+            name: partials-configmap
+            optional: true
+        - name: templates-config
+          configMap:
+            name: templates-configmap
+            optional: true
+        {{- end }}
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
@@ -37,9 +51,28 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- if .Values.flexible_config.enabled }}
+          env:
+            - name: FC_ENABLE
+              value: "1"
+            - name: FC_SETTINGS
+              value: "/etc/krakend/flexible_config/settings"
+            - name: FC_PARTIALS
+              value: "/etc/krakend/flexible_config/partials"
+            - name: FC_TEMPLATES
+              value: "/etc/krakend/flexible_config/templates"
+          {{- end }}
           volumeMounts:
             - name: config
               mountPath: /etc/krakend/
+            {{- if .Values.flexible_config.enabled }}
+            - name: settings-config
+              mountPath: /etc/krakend/flexible_config/settings
+            - name: partials-config
+              mountPath: /etc/krakend/flexible_config/partials
+            - name: templates-config
+              mountPath: /etc/krakend/flexible_config/templates
+            {{- end }}
           ports:
             - name: http
               containerPort: 8080

@@ -1,0 +1,8 @@
+{{- if and (.Values.flexible_config.enabled) ( eq (.Files.Glob "flexible-configuration/settings/*").AsConfig "" ) }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: settings-configmap
+data:
+{{ (.Files.Glob "flexible-configuration/settings/*").AsConfig | indent 4 }}
+{{- end }}
