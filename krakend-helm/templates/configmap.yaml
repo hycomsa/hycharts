@@ -1,11 +1,13 @@
+{{ if not .Values.usedAsSubchart }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ template "krakend.fullname" . }}-configmap
+  name: {{ .Release.Name }}-kraken-configmap
 data:
   krakend.json: |-
 {{- if eq .Values.krakendJson "" }}
 {{ .Files.Get "krakend.json" | indent 4 }}
 {{- else }}
 {{ .Values.krakendJson | indent 4 }}
+{{- end}}
 {{- end}}

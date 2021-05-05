@@ -26,7 +26,26 @@ Just modify krakend.json.
 
 #### - As a dependency
 
-[Override](https://helm.sh/docs/chart_template_guide/subcharts_and_globals/#overriding-values-from-a-parent-chart) subchart values.yaml krakendJson key from parent chart values.yaml and paste KrakenD configuration there. 
+There are 2 options here:
+
+1. [Override](https://helm.sh/docs/chart_template_guide/subcharts_and_globals/#overriding-values-from-a-parent-chart) subchart values.yaml krakendJson key from parent chart values.yaml and paste KrakenD configuration there. 
+2. Override subchart usedAsSubchart key to true, create your krakend.json configuration file and put it into parent chart root directory. Create template for configmap in parent chart with the following content:
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-kraken-configmap
+data:
+  krakend.json: |-
+{{- if eq .Values.<your_custom_key> "" }}
+{{ .Files.Get "krakend.json" | indent 4 }}
+{{- else }}
+{{ .Values.<your_custom_key> | indent 4 }}
+{{- end}}
+```
+KrakenD configuration can still be modified from values.yaml using <your_custom_key>. This process will substitute subchart configmap with KrakenD configuration with one from parent and mount it to subchart deployment. Now you can keep your KrakenD configuration in your parent chart json file.
+
+   
 
 ### Using KrakenD Flexible Configuration
 

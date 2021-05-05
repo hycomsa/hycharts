@@ -23,7 +23,7 @@ spec:
       volumes:
         - name: config
           configMap:
-            name: {{ template "krakend.fullname" . }}-configmap
+            name: {{ .Release.Name }}-kraken-configmap
         {{- if .Values.flexible_config.enabled }}
         - name: settings-config
           configMap:
