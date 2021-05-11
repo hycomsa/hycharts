@@ -102,3 +102,5 @@ probes:
 
 flexible_config:
   enabled: false
+
+usedAsSubchart: false
